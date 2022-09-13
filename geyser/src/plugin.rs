@@ -20,7 +20,7 @@ pub use {
 #[derive(Clone, Debug)]
 pub struct GeyserRedisPlugin{
     pub redis_client: Option<RedisClient>,
-    postgres_client: Option<PostgresClient>,
+    pub postgres_client: Option<PostgresClient>,
 }
 
 impl GeyserPlugin for GeyserRedisPlugin{

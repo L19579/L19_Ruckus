@@ -7,7 +7,7 @@ edition = "2021"
 
 [dependencies]
 redis = "=0.21.6"
-sqlx = { version = "=0.6.1", features = ["runtime-async-std-native-tls"] }
+sqlx = { version = "=0.6.1", features = ["postgres", "runtime-async-std-native-tls"] }
 postgres = "=0.19.4"
 anyhow = "=1.0.64"
 solana-geyser-plugin-interface = "=1.10.35"

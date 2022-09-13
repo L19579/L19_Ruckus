@@ -1,12 +1,9 @@
 use {
     redis,
-    // self for ::Client
-    // eliminate tokio as subdepency.
-    // sqlx' PgPool should allow copy with 'std' futures
-    postgres::{ 
-        self, NoTls,
+    sqlx::{
+        postgres,
+        Executor,
     },
-    sqlx::postgres 
     anyhow::{
         anyhow, Result,
     },
@@ -25,20 +22,42 @@ pub struct RedisClient{
     pub redis: redis::Client,
 }
 
+impl RedisClient{
+    pub fn new() -> Result<Self>{
+        // ----- assign uri in config file
+        let redis = redis::Client::
+            open("redis://jojo:password@127.0.0.1:6379/ruckusdb")
+            .expect("Redis DB connection failed.");
+        return Ok(Self {
+            redis, 
+        });
+    }
+}
+
 #[derive(Clone, Debug)]
 pub struct PostgresClient{
-    pub postgres: postgres::Client,
+    pub postgres: postgres::PgPool,
 }
 
 impl PostgresClient{
-    pub fn new() -> Result<Self>{
-        let mut postgres = postgres::
-            Client::connect("host=localhost user=postgres", NoTls)?;            
+    pub async fn new() -> Result<Self>{
+        // ----- check that server is online and db/tables configured w/ sql script pre launch
         let postgres_script: String = fs::read_to_string(POSTGRES_LAUNCH_SCRIPT)?;
+        // ----- assign uri in config file
+        let postgres = postgres::PgPool::
+            connect("postgresql://jojo:password@127.0.0.1:5432/ruckusdb")
+            .await
+            .expect("Postgres DB connection failed.");
+        postgres.execute(postgres_script.as_str())
+            .await
+            .expect("Failed to execute Postgres startup script.");
 
-        postgres.batch_execute(&postgres_script)?;
         return Ok(Self{
             postgres
         }); 
+    }
+    
+    pub fn load_target_accounts() -> Result<()>{
+        return Ok(());
     }
 }
