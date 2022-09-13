@@ -2,7 +2,7 @@
 
 ## Purpose: Trading
 
-Low latency chain state read; lazy atomic trade exec.
+Low latency chain state read + lazy atomic trade exec.
 
 ![ruckus](https://github.com/L19579/L19_Ruckus/blob/master/imgs/ruckus_checkers_c.png)
 ---
