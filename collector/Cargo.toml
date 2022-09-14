@@ -1,0 +1,26 @@
+[package]
+name = "collector"
+version = "0.1.0"
+edition = "2021"
+
+[dependencies]
+log = "0.4.17"
+redis = "0.21.6"
+chorno = "0.4.22"
+
+[dependencies.serde]
+version = "1.0.144"
+features = [
+  "derive"
+]
+
+[dependencies.sqlx]
+version = "=0.6.1"
+default-features = false
+features = [
+  "uuid"
+  "chrono"
+  "macros"
+  "migrate"
+  "postgres"
+]

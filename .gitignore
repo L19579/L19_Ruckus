@@ -2,3 +2,4 @@
 notes.txt
 Cargo.lock
 /target
+/bin
