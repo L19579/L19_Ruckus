@@ -1,26 +1,23 @@
 pub use {
     crate::{
-        client::{
-            RedisClient,
-            PostgresClient,
-        },
+        config::Config,
+        client::RedisClient,
     },
     solana_geyser_plugin_interface::
-        geyser_plugin_interface::{
-            GeyserPlugin,
-            SlotStatus,
-            Result as GeyserResult,
-            ReplicaAccountInfo,
-            ReplicaAccountInfoVersions,
-            ReplicaTransactionInfoVersions,
-            ReplicaBlockInfoVersions,
-        },
+    geyser_plugin_interface::{
+        GeyserPlugin,
+        SlotStatus,
+        Result as GeyserResult,
+        ReplicaAccountInfo,
+        ReplicaAccountInfoVersions,
+        ReplicaTransactionInfoVersions,
+        ReplicaBlockInfoVersions,
+    },
 };
 
 #[derive(Clone, Debug)]
 pub struct GeyserRedisPlugin{
     pub redis_client: Option<RedisClient>,
-    pub postgres_client: Option<PostgresClient>,
 }
 
 impl GeyserPlugin for GeyserRedisPlugin{
@@ -29,6 +26,8 @@ impl GeyserPlugin for GeyserRedisPlugin{
     }
 
     fn on_load(&mut self, _config_file: &str) -> GeyserResult<()>{
+        let redis_config = Config::load().unwrap().redis.unwrap(); // -- unwraps
+        self.redis_client = RedisClient::new(redis_config);
         return Ok(());
     }
 

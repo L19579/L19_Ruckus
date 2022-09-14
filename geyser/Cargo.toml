@@ -7,12 +7,11 @@ edition = "2021"
 crate-type = ["cdylib", "rlib"]
 
 [dependencies]
-log = "0.4.17"
+log = "=0.4.17"
+toml = "0.5.9"
 redis = "=0.21.6"
-postgres = "=0.19.4"
 anyhow = "=1.0.64"
+solana-sdk = "=1.10.35"
+solana-transaction-status = "=1.10.35"
 solana-geyser-plugin-interface = "=1.10.35"
-
-[depencies.sqlx]
-version = "=0.6.1" 
-features = ["postgres", "runtime-async-std-native-tls"] }
+serde = { version = "=1.0.144", features = ["derive"] }

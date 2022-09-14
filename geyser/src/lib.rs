@@ -1,3 +1,4 @@
+pub mod config;
 pub mod client;
 pub mod plugin;
 
@@ -13,7 +14,6 @@ use {
 pub unsafe extern "C" fn _create_plugin() -> *mut dyn GeyserPlugin{
     let geyser_redis_plugin: Box<dyn GeyserPlugin> = Box::new(GeyserRedisPlugin{
         redis_client: None,
-        postgres_client: None, 
     });
     
     return Box::into_raw(geyser_redis_plugin);
