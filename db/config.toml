@@ -1,12 +1,12 @@
 [redis]
-host: "127.0.01"
+host: "127.0.0.1"
 port: 6379
 username = "ruckus"
 password = "password"
 database_name = "ruckus_db"
 
 [postgres]
-host: "127.0.01"
+host: "127.0.0.1"
 port: 5432
 username = "ruckus"
 password = "password"
