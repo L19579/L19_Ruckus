@@ -6,7 +6,7 @@ use {
 };
 
 // -- relative link issue
-const PATH_DB_CONFIG: &str = "/home/jojo/partition_3/programming_2/FULL/general_arb/L19_Ruckus/db";
+const PATH_DB_CONFIG: &str = "/home/jojo/partition_3/programming_2/FULL/general_arb/L19_Ruckus/shared/config.toml";
 
 #[derive(Deserialize, Clone, Debug)]
 pub struct RedisConfig{

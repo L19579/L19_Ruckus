@@ -1,0 +1,58 @@
+[redis]
+host: "127.0.0.1"
+port: 6379
+username = "ruckus"
+password = "password"
+database = "ruckus_db"
+
+[postgres]
+host: "127.0.0.1"
+port: 5432
+username = "ruckus"
+password = "password"
+database = "ruckus_db"
+
+[[targets]] 
+name = "solana"
+accounts_table = "solana"
+parent_program = "SwaPpA9LAaLfeLi3a68M4DjnLqgtticKg6CnyNwgAC8"
+
+[[targets]] 
+name = "orca"
+accounts_table = "orca"
+parent_program = "DjVE6JNiYqPL2QXyCUUh8rNjHrbz9hXHNYt99MQ59qw1"
+
+[[targets]] 
+name = "orcav2"
+accounts_table = "orcav2"
+parent_program = "9W959DqEETiGZocYWCQPaJ6sBmUzgfxXfqGeTEdp3aQP"
+
+[[targets]] 
+name = "saros"
+accounts_table = "saros"
+parent_program = "SSwapUtytfBdBn1b9NUGG6foMVPtcWgpRU32HToDUZr"
+
+[[targets]] 
+name = "saber"
+accounts_table = "saber"
+parent_program = "SSwpkEEcbUqx4vtoEByFjSkhKdCT862DNVb52nZg1UZ"
+
+[[targets]] 
+name = "step"
+accounts_table = "step"
+parent_program = "SSwpMgqNDsyV7mAgN9ady4bDVu5ySjmmXejXvy2vLt1"
+
+[[targets]] 
+name = "stepn"
+accounts_table = "stepn"
+parent_program = "Dooar9JkhdZ7J3LHN3A7YCuoGRUggXhQaG4kijfLGU2j"
+
+#[[targets]] 
+#name = "aldrin"
+#accounts_table = "aldrin"
+#parent_program = "Dooar9JkhdZ7J3LHN3A7YCuoGRUggXhQaG4kijfLGU2j"
+
+#[[targets]] 
+#name = "serum" # serumv3 swap
+#accounts_table = "serum"
+#parent_program = "22Y43yTVxuUkoRKdm9thyRhQ3SdgQS7c7kB6UNCiaczD"
