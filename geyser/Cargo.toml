@@ -12,5 +12,6 @@ toml = "0.5.9"
 redis = "=0.21.6"
 anyhow = "=1.0.64"
 solana-sdk = "=1.10.35"
+solana-transaction-status = "=1.10.35"
 solana-geyser-plugin-interface = "=1.10.35"
 serde = { version = "=1.0.144", features = ["derive"] }

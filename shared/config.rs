@@ -9,6 +9,21 @@ use {
 const PATH_DB_CONFIG: &str = "/home/jojo/partition_3/programming_2/FULL/general_arb/L19_Ruckus/shared/config.toml";
 
 #[derive(Deserialize, Clone, Debug)]
+pub struct Config{
+    pub redis: RedisConfig,
+    pub postgres: PostgresConfig,
+    pub targets: Vec<Targets>
+}
+
+impl Config{
+    pub fn load() -> Result<Config>{
+        let mut config_content: String = fs::read_to_string(PATH_DB_CONFIG)?;
+        let config: Config = toml::de::from_str(&config_content)?;
+        return Ok(config);
+    }
+}
+
+#[derive(Deserialize, Clone, Debug)]
 pub struct RedisConfig{
     pub host: String,
     pub port: u64,
@@ -51,15 +66,8 @@ impl PostgresConfig{
 }
 
 #[derive(Deserialize, Clone, Debug)]
-pub struct Config{
-    pub redis: Option<RedisConfig>,
-    pub postgres: Option<PostgresConfig>,
-}
-
-impl Config{
-    pub fn load() -> Result<Config>{
-        let mut config_content: String = fs::read_to_string(PATH_DB_CONFIG)?;
-        let config: Config = toml::de::from_str(&config_content)?;
-        return Ok(config);
-    }
+pub struct Targets{
+    pub name: String,
+    pub accounts_table: String,
+    pub parent_program: String,
 }

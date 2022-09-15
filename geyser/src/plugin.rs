@@ -26,7 +26,7 @@ impl GeyserPlugin for GeyserRedisPlugin{
     }
 
     fn on_load(&mut self, _config_file: &str) -> GeyserResult<()>{
-        let redis_config = Config::load().unwrap().redis.unwrap();
+        let redis_config = Config::load().unwrap().redis;
         self.redis_client = Some(RedisClient::new(&redis_config).unwrap());
         return Ok(());
     }
@@ -50,6 +50,30 @@ impl GeyserPlugin for GeyserRedisPlugin{
         return Ok(());
     }
     
+    fn notify_transaction(
+        &mut self,
+        transaction: ReplicaTransactionInfoVersions,
+        slot: u64,
+    ) -> GeyserResult<()>{
+        let transaction = match transaction{
+            ReplicaTransactionInfoVersions::V0_0_1(tx) => {
+                // Ignoring failed txs to avoid invalid accs in db.
+                if tx.transaction_status_meta.status.is_err(){
+                    return Ok(());
+                }
+                tx
+            }, 
+        };
+        
+        self.redis_client
+            .as_mut()
+            .unwrap()
+            .transaction_event(slot, &transaction)
+            .unwrap();
+
+        return Ok(());
+    }
+    
     fn update_slot_status(
         &mut self,
         slot: u64,
@@ -68,13 +92,6 @@ impl GeyserPlugin for GeyserRedisPlugin{
     // Rest required for geyser interface but not used in this program.
     fn on_unload(&mut self){}
     fn notify_end_of_startup(&mut self) -> GeyserResult<()>{
-        return Ok(());
-    }
-    fn notify_transaction(
-        &mut self,
-        _transaction: ReplicaTransactionInfoVersions,
-        _slot: u64,
-    ) -> GeyserResult<()>{
         return Ok(());
     }
     fn notify_block_metadata(
