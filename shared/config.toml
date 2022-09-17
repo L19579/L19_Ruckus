@@ -1,13 +1,13 @@
 [redis]
-host: "127.0.0.1"
-port: 6379
+host = "127.0.0.1"
+port = 6379
 username = "ruckus"
 password = "password"
 database = "ruckus_db"
 
 [postgres]
-host: "127.0.0.1"
-port: 5432
+host = "127.0.0.1"
+port = 5432
 username = "ruckus"
 password = "password"
 database = "ruckus_db"
@@ -16,6 +16,7 @@ database = "ruckus_db"
 name = "solana"
 accounts_table = "solana"
 parent_program = "SwaPpA9LAaLfeLi3a68M4DjnLqgtticKg6CnyNwgAC8"
+ignore = [0, 2, 3, 6]
 
 [[targets]] 
 name = "orca"

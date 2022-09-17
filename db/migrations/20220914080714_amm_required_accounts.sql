@@ -115,6 +115,7 @@ CREATE TABLE stepn(
 CREATE TABLE aldrin(
   id uuid NOT NULL,
   PRIMARY KEY (id),
+  parent_program VARCHAR(45) NOT NULL,
   pool_program VARCHAR(45) NOT NULL UNIQUE,
   pool_authority VARCHAR(45) NOT NULL,
   pool_mint VARCHAR(45) NOT NULL UNIQUE,
@@ -131,6 +132,7 @@ CREATE TABLE aldrin(
 CREATE TABLE serum(
   id uuid NOT NULL,
   PRIMARY KEY (id),
+  parent_program VARCHAR(45) NOT NULL,
   market VARCHAR(45) NOT NULL,
   market_open_orders VARCHAR(45) NOT NULL,
   market_request_queue VARCHAR(45) NOT NULL,
@@ -143,7 +145,7 @@ CREATE TABLE serum(
   market_vault_signer VARCHAR(45) NOT NULL,
   market_coin_wallet VARCHAR(45) NOT NULL,
   user_authority VARCHAR(45),
-  user_pc_wallet TEX,
+  user_pc_wallet TEXT,
   dex_program VARCHAR(45) NOT NULL,
   token_program VARCHAR(45) NOT NULL,
   rent VARCHAR(45) NOT NULL,

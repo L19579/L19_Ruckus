@@ -58,7 +58,8 @@ impl GeyserPlugin for GeyserRedisPlugin{
         let transaction = match transaction{
             ReplicaTransactionInfoVersions::V0_0_1(tx) => {
                 // Ignoring failed txs to avoid invalid accs in db.
-                if tx.transaction_status_meta.status.is_err(){
+                if tx.transaction_status_meta.status.is_err() 
+                || tx.is_vote {
                     return Ok(());
                 }
                 tx
